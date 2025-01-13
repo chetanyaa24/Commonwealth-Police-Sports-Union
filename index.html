@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Page with Images and Cards</title>
+    <style>
+        /* Page Layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Container for the images */
+        .image-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .image-row img {
+            width: 49%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Card container */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .image-card {
+            flex: 1 1 calc(25% - 10px);
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .image-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .image-card p {
+            font-size: 14px;
+            color: #333;
+            margin: 0;
+        }
+
+        /* Text Card */
+        .text-card {
+            margin: 20px auto;
+            max-width: 1200px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+        }
+        #splash-screen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #004080; /* Dark blue background */
+            z-index: 9999;
+        }
+
+        #splash-screen img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Main content hidden by default */
+        #main-content {
+            display: none;
+        }
+        /* CSS for Preamble Section */
+        .preamble-section {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .preamble-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .preamble-content {
+            margin-top: 10px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .preamble-content em {
+            font-style: italic;
+        }
+
+        .preamble-image {
+            margin-top: 20px;
+        }
+
+        .preamble-image img {
+            width: 150px; /* Adjust image size */
+            height: auto;
+        }
+
+        .preamble-note {
+            margin-top: 15px;
+            font-size: 14px;
+            font-style: italic;
+        }
+        .footer {
+            background-color: #004080; /* Dark blue background */
+            color: white; /* White text color */
+            padding: 20px 10px; /* Add padding for spacing */
+            text-align: center; /* Center align text */
+            font-family: Arial, sans-serif;
+        }
+
+        .footer .footer-links {
+            margin-top: 10px;
+            font-size: 14px; /* Adjust font size for links */
+        }
+
+        .footer .footer-links a {
+            color: white; /* White links */
+            text-decoration: none; /* Remove underline */
+            margin: 0 10px; /* Add spacing between links */
+            transition: color 0.3s ease;
+        }
+
+        .footer .footer-links a:hover {
+            color: #cccccc; /* Change link color on hover */
+        }
+
+        .footer .footer-text {
+            font-size: 14px; /* Adjust font size for footer text */
+            margin: 10px 0 0;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fe1e1e; /* Red background */
+            padding: 15px 20px;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; /* Add gap between navbar and line */
+            left: 0;
+            width: 100%;
+            height: 6px; /* Blue line thickness */
+            background-color: #004080; /* Blue color */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px; /* Logo width */
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .navbar-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff; /* White title text */
+            margin-left: 15px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px; /* Spacing between links */
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff; /* White links */
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #f6f9fc; /* Light hover effect */
+        }
+    </style>
+</head>
+<body>
+
+   <!-- Splash Screen -->
+   <div id="splash-screen">
+    <img src="images/logo.jpg" alt="Logo">
+</div>
+
+<!-- Main Content -->
+<div id="main-content" style="display: none;">
+    <nav class="navbar">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="images/logo.jpg" alt="Logo">
+            <div class="navbar-title">Commonwealth Police Sports Union</div>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="mission.html">Our Mission</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="links.html">Links</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Two Images -->
+    <div class="image-row">
+        <img src="images/cover1.jpg" alt="Left Image">
+        <img src="images/g1.jpg" alt="Right Image">
+    </div>
+
+    <!-- Four Image Cards -->
+    <div class="card-container">
+        <div class="image-card">
+            <img src="images/g2.jpg" alt="Card 1">
+            <p>Card 1 description goes here. Providing key details.</p>
+        </div>
+        <div class="image-card">
+            <img src="images/g3.jpg" alt="Card 2">
+            <p>The partnership with the International Association of Chiefs of Police (IACP) in Malaysia, spearheaded by Mrs. Emie Chang, signifies a major milestone in fostering collaborative initiatives for improving policing standards, security protocols, and public safety in the region. </p>
+        </div>
+        <div class="image-card">
+            <img src="images/g4.jpg" alt="Card 3">
+            <p>Visit with The European Police Sports Union headquarter in Athens with Mr. Gorgeous Tzakitzis ,President of USPE.</p>
+        </div>
+        <div class="image-card">
+            <img src="images/g5.jpg" alt="Card 4">
+            <p>Exchange of Token of cooperation with Inspector General of Bangladesh Police during Interpol meeting in New Delhi</p>
+        </div>
+    </div>
+
+    <!-- Centered Text Card -->
+    <div class="text-card">
+        We, the Commonwealth Police Sports Union, aim to provide a platform for police personnel to engage in sports, share best practices, and build lasting relationships, thereby enhancing our skills, promoting cross-cultural understanding, and contributing to the advancement of policing excellence throughout the Commonwealth."
+
+We, the Commonwealth Police Sports Union, united in our commitment to law enforcement and athletic excellence, come together to promote camaraderie, sportsmanship, and friendly competition among police personnel across the Commonwealth."
+
+We, the Commonwealth Police Sports Union is dedicated to fostering a spirit of unity, cooperation, and healthy competition among police officers from diverse backgrounds and cultures, promoting physical fitness, mental well-being, and esprit de corps."
+<div class="preamble-section">
+    <p class="preamble-title">Preamble Of</p>
+    <p class="preamble-content">
+        Commonwealth Police Sports Union <br>
+        is certified  and apostille by        <br>
+        Ministry of External Affairs, Government of India, New Delhi <br>
+        on Dated 06 December 2024 <br>
+        vide no 0I 2834634
+    </p>
+    <div class="preamble-image">
+        <img src="images/ministry of external affairs logo.jpg" alt="Government of India Logo">
+    </div>
+    <p class="preamble-note">
+        (apostilled by under Hague Convention 5 October 1961)
+    </p>
+</div>
+<footer class="footer">
+    <div class="footer-text">
+        Commonwealth Police Sports Union
+    </div>
+    <div class="footer-text">
+        © 2025 Commonwealth Police Sports Union. All rights reserved.
+    </div>
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="mission.html">Our Mission</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
